@@ -2,185 +2,132 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IntelliSwitch</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Project Aira - Bharat’s Professional Network</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" />
   <style>
     body {
-      padding-top: 70px;
-      transition: background-color 0.3s, color 0.3s;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #001f3f;
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(90deg, #f2f4f6 55%, #e6f0fc 100%);
+      color: #444;
     }
-    .navbar {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      background-color: #001f3f;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14);
+    header {
+      background: white;
+      padding: 20px 30px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    .hero-section {
-      padding: 40px 20px;
-      background: linear-gradient(to right, #72a6da, #092049) !important;
-      background-image: url('background.jpg');
-      background-size: cover;
-      background-position: center;
-      color: #0a0000;
+    header .logo {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      color: #138ed1;
+      font-size: 1.6rem;
+      text-decoration: none;
     }
-    .dark-mode {
-      background-color:#001f3f;
-      color: #d1d1f9;
+    header .logo img {
+      width: 40px;
+      margin-right: 12px;
     }
-    .dark-mode .navbar, .dark-mode .footer {
-      background-color: #0b0b3b !important;
+    nav a {
+      margin-left: 24px;
+      font-weight: 600;
+      color: #138ed1;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s;
     }
-    .dark-mode .card, .dark-mode .modal-content {
-      background-color: #1c1c3c;
-      color: black;
+    nav a:hover {
+      color: #0b5c89;
     }
-    .footer {
-      background-color: #001f3f;
+    main.hero {
+      max-width: 900px;
+      margin: 80px auto 120px auto;
+      padding: 0 20px;
+      text-align: center;
     }
-    .card {
+    main.hero h1 {
+      font-size: 3rem;
+      color: #138ed1;
+      margin-bottom: 12px;
+    }
+    main.hero p {
+      font-size: 1.25rem;
+      margin-bottom: 32px;
+      color: #555;
+    }
+    main.hero .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    main.hero .btn {
+      background: linear-gradient(90deg, #138ed1 50%, #19e2c1 100%);
+      color: white;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 28px;
       border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      box-shadow: 0 6px 12px #1993b1a0;
+      transition: background 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
     }
-    .img-feature {
-      max-width: 100%;
-      height:100px;
-      margin-bottom: 15px;
+    main.hero .btn:hover {
+      background: linear-gradient(90deg, #0b5c89 50%, #0f8c7b 100%);
+    }
+    footer {
+      text-align: center;
+      padding: 24px 10px;
+      font-size: 0.9rem;
+      color: #888;
+      border-top: 1px solid #ddd;
+      margin-top: 100px;
+    }
+    @media (max-width: 480px) {
+      main.hero h1 {
+        font-size: 2.2rem;
+      }
+      main.hero p {
+        font-size: 1rem;
+      }
+      nav a {
+        font-size: 0.9rem;
+        margin-left: 16px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#">IntelliSwitch</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-          <li class="nav-item"><a class="nav-link" href="#uploadForm">Analyze</a></li>
-          <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
-          <li class="nav-item"><button class="btn btn-light ms-3" onclick="toggleDarkMode()">🌓</button></li>
-          <li class="nav-item"><button class="btn btn-outline-light ms-3" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <header>
+    <a href="index.html" class="logo">
+      <img src="https://cdn-icons-png.flaticon.com/512/2170/2170153.png" alt="Aira logo" />
+      Project Aira
+    </a>
+    <nav>
+      <a href="login.html">Login</a>
+      <a href="signup.html">Sign Up</a>
+    </nav>
+  </header>
 
-  <!-- Hero Section -->
-  <section class="hero-section text-center">
-    <div class="container">
-      <h1 class="display-5 fw-bold">AI-Powered Resume Screening</h1>
-      <p class="lead">Transform your hiring or career switch with intelligent resume insights.</p>
-      <a href="#uploadForm" class="btn btn-light text-primary fw-semibold btn-lg mt-3 animate__animated animate__pulse animate__infinite">Get Started</a>
+  <main class="hero" role="main" aria-label="Project Aira Introduction">
+    <h1>Bharat’s Professional Network</h1>
+    <p>Verified Identities. Multilingual Posts. Built-in UPI Payments. AI-Powered Career Growth.</p>
+    <div class="btn-group">
+      <a href="signup.html" class="btn" aria-label="Sign up for Project Aira">Get Started</a>
+      <a href="login.html" class="btn" aria-label="Login to Project Aira" style="background:#19e2c1;">Login</a>
     </div>
-  </section>
+  </main>
 
-  <!-- About Section -->
-  <section id="about" class="py-5">
-    <div class="container">
-      <h2 class="text-center fw-bold text-primary mb-4">About IntelliSwitch</h2>
-      <p class="lead text-center">IntelliSwitch helps job seekers and recruiters streamline the resume screening process. Whether you're transitioning careers or shortlisting candidates, our AI gives you skill gaps, match scores, and personalized roadmaps instantly.</p>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section id="features" class="py-5 bg-light">
-    <div class="container">
-      <h2 class="text-center fw-bold text-primary mb-5">Key Features</h2>
-      <div class="row text-center">
-        <div class="col-md-4">
-          <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png" class="img-feature" alt="Match Scoring">
-          <h5 class="fw-bold">🔍 Resume Match Scoring</h5>
-          <p>Instantly calculate how well a resume matches a job description.</p>
-        </div>
-        <div class="col-md-4">
-          <img src="https://cdn-icons-png.flaticon.com/512/9714/9714879.png" class="img-feature" alt="Skill Roadmap">
-          <h5 class="fw-bold">🧠 Skill Roadmap</h5>
-          <p>Get a personalized path to transition to your dream role based on your current skills.</p>
-        </div>
-        <div class="col-md-4">
-          <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png" class="img-feature" alt="Keyword Highlighter">
-          <h5 class="fw-bold">📝 Keyword Highlighter</h5>
-          <p>Automatically highlight relevant keywords in uploaded resumes to improve visibility.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Upload Form -->
-  <section id="uploadForm" class="py-5">
-    <div class="container">
-      <h2 class="text-center fw-bold text-primary mb-4">Upload Resume</h2>
-      <form>
-        <div class="mb-3">
-          <label for="resumeFile" class="form-label">Upload your resume (PDF/DOC)</label>
-          <input class="form-control" type="file" id="resumeFile" accept=".pdf,.doc,.docx" />
-        </div>
-        <div class="mb-3">
-          <label for="jdFile" class="form-label">Upload Job Description (PDF/DOC)</label>
-          <input class="form-control" type="file" id="jdFile" accept=".pdf,.doc,.docx" />
-        </div>
-        
-        <button class="btn btn-primary">Analyze</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section id="testimonials" class="py-5 bg-light">
-    <div class="container">
-      <h2 class="text-center fw-bold text-primary mb-5">What Users Say</h2>
-      <div class="row">
-        <div class="col-md-6">
-          <blockquote class="blockquote">“I was able to transition from sales to data analysis in 2 months thanks to the skill roadmap.”</blockquote>
-          <footer class="blockquote-footer">Anjali Mehra, Career Switcher</footer>
-        </div>
-        <div class="col-md-6">
-          <blockquote class="blockquote">“Screening 100+ resumes is no longer a nightmare. This tool saved us hours!”</blockquote>
-          <footer class="blockquote-footer">HR Team, TechHire Inc.</footer>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer text-white text-center py-3">
-    <div class="container">
-      <p class="mb-0">&copy; 2025 IntelliSwitch. All rights reserved.</p>
-    </div>
+  <footer>
+    &copy; 2025 Project Aira • Built with trust & technology for Bharat’s professionals
   </footer>
-
-  <!-- Login Modal -->
-  <div class="modal fade" id="loginModal" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Login or Signup</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <input type="email" class="form-control mb-2" placeholder="Email">
-          <input type="password" class="form-control mb-2" placeholder="Password">
-          <button class="btn btn-primary w-100">Login</button>
-          <p class="mt-2 text-center"><a href="#">Don't have an account? Signup</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
-    }
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
