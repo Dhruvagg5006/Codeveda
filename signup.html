@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign Up - Project Aira</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" />
+  <style>
+    body {
+      margin: 0; font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(90deg, #f2f4f6 55%, #e6f0fc 100%);
+      display: flex; justify-content: center; align-items: center; height: 100vh;
+    }
+    .signup-container {
+      background: #fff; padding: 42px 46px; border-radius: 24px; box-shadow: 0 6px 28px #d8e1f166;
+      max-width: 480px; width: 90%;
+      text-align: center;
+    }
+    .signup-container h2 {
+      margin-bottom: 24px; color: #138ed1; font-weight: 700; font-size: 2rem;
+    }
+    label {
+      font-weight: 600; display: block; text-align: left; margin: 16px 0 8px;
+      color: #555;
+    }
+    input[type="text"], input[type="email"], input[type="password"], select {
+      width: 100%; padding: 14px 14px; border-radius: 10px; border: 1.5px solid #cbd6e2;
+      font-size: 1rem; outline: none; transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+    input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, select:focus {
+      border-color: #138ed1;
+    }
+    .select-verification {
+      margin-top: 12px;
+    }
+    button.signup-btn {
+      margin-top: 32px; width: 100%; background: linear-gradient(90deg, #138ed1 50%, #19e2c1 100%);
+      color: white; font-weight: 700; padding: 14px; border: none; border-radius: 28px;
+      font-size: 1.1rem; cursor: pointer; box-shadow: 0 6px 12px #1993b1a0;
+      transition: background 0.3s ease;
+    }
+    button.signup-btn:hover {
+      background: linear-gradient(90deg, #0b5c89 50%, #0f8c7b 100%);
+    }
+    .signin-link {
+      margin-top: 20px; font-size: 0.9rem; color: #555;
+    }
+    .signin-link a {
+      color: #138ed1;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .signin-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <script>
+    function onSubmit(event) {
+      event.preventDefault();
+      const form = event.target;
+      // Simulate Aadhaar or College/Work ID KYC verification steps
+      const verificationType = form.verification.value;
+      if (verificationType === "aadhaar") {
+        alert("Aadhaar KYC verification step simulated. Signup successful!");
+      } else if (verificationType === "college") {
+        alert("College ID verification step simulated. Signup successful!");
+      } else if (verificationType === "work") {
+        alert("Work ID verification step simulated. Signup successful!");
+      } else {
+        alert("Please select a valid verification method.");
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="signup-container" role="main" aria-label="Sign Up for Project Aira">
+    <h2>Create your Aira Account</h2>
+    <form onsubmit="onSubmit(event)">
+      <label for="fullname">Full name</label>
+      <input type="text" id="fullname" name="fullname" placeholder="Your full name" required autofocus />
+
+      <label for="email">Email address</label>
+      <input type="email" id="email" name="email" placeholder="Your email" required />
+
+      <label for="password">Create password</label>
+      <input type="password" id="password" name="password" placeholder="Minimum 8 characters" required minlength="8" />
+
+      <label for="verification" class="select-verification">Select verification type</label>
+      <select name="verification" id="verification" required>
+        <option value="" disabled selected>Choose verification</option>
+        <option value="aadhaar">Aadhaar (Identity Verified)</option>
+        <option value="college">College (.ac.in email) 🎓</option>
+        <option value="work">Work (Company email/HR) 🏢</option>
+      </select>
+
+      <button type="submit" class="signup-btn">Sign Up</button>
+    </form>
+    <div class="signin-link">
+      Already have an account? <a href="login.html">Login here</a>
+    </div>
+  </div>
+</body>
+</html>
