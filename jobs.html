@@ -3,379 +3,225 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Project Aira - Dashboard</title>
+  <title>Project Aira - Jobs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" />
   <style>
-    /* Reset & base */
+    /* Base and Reset */
     * {
       box-sizing: border-box;
     }
     body, html {
-      margin: 0; padding: 0; height: 100%;
-      font-family: 'Montserrat', Arial, sans-serif;
-      background: linear-gradient(135deg, #e0f7fa 0%, #ffffff 100%);
-      color: #222;
-    }
-    a {
-      text-decoration: none; color: inherit;
+      margin: 0; padding: 0; font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(135deg, #f0f4f8 0%, #d9e9fe 100%);
+      color: #1a242f;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
     }
     /* Header */
     header {
-      height: 60px; background: #138ed1; color: white;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-      position: sticky; top: 0; z-index: 100;
+      background: #138ed1;
+      color: white;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 26px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.13);
+      position: sticky;
+      top: 0;
+      z-index: 120;
     }
     .logo {
-      font-weight: 700; font-size: 1.5rem; display: flex; align-items: center;
+      font-weight: 700;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: white;
     }
     .logo img {
-      height: 32px; margin-right: 10px;
+      height: 32px;
+      margin-right: 10px;
     }
     nav {
-      display: flex; gap: 22px; align-items: center;
+      display: flex;
+      gap: 22px;
+      align-items: center;
     }
     nav a {
-      font-weight: 600; font-size: 1rem;
-      color: white; padding: 8px 14px;
+      font-weight: 600;
+      font-size: 1rem;
+      color: white;
+      padding: 8px 14px;
       border-radius: 12px;
-      transition: background-color 0.2s ease;
+      transition: background-color 0.25s ease;
+      text-decoration: none;
     }
     nav a:hover, nav a.active {
       background-color: #0e5a8a;
     }
-    /* Layout */
-    .container {
-      display: flex; max-width: 1200px; margin: 24px auto; gap: 24px;
-      padding: 0 20px; flex-wrap: wrap;
+    /* Main content */
+    main.container {
+      max-width: 1100px;
+      margin: 32px auto;
+      padding: 0 20px;
+      flex: 1;
     }
-    /* Feed */
-    .feed {
-      flex: 2.3; min-width: 300px;
-      background: #fff;
-      border-radius: 20px;
-      box-shadow: 0 10px 24px #91c7f1aa;
-      padding: 28px;
-      max-height: calc(100vh - 120px);
-      overflow-y: auto;
-    }
-    .feed h2 {
+    h1 {
       color: #138ed1;
       font-weight: 700;
-      font-size: 1.7rem;
+      font-size: 2.4rem;
       margin-bottom: 24px;
-      border-bottom: 2px solid #19e2c1;
-      padding-bottom: 8px;
+      border-bottom: 3px solid #19e2c1;
+      padding-bottom: 10px;
     }
-    .post-card {
+    /* Job cards container */
+    .jobs-list {
       display: flex;
+      flex-direction: column;
       gap: 20px;
-      padding: 18px 20px;
-      background: linear-gradient(135deg, #bbdefb, #d1f0ff);
+    }
+    /* Single job card */
+    .job-card {
+      background: white;
       border-radius: 18px;
-      margin-bottom: 20px;
-      box-shadow: 0 6px 14px #a7d3f8b3;
+      box-shadow: 0 7px 25px #94bbf68a;
+      padding: 26px 30px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
       transition: box-shadow 0.3s ease;
+      cursor: pointer;
     }
-    .post-card:hover {
-      box-shadow: 0 9px 22px #7ab8f6de;
+    .job-card:hover {
+      box-shadow: 0 11px 35px #7999dbdb;
     }
-    .avatar {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: #138ed1 url("https://cdn-icons-png.flaticon.com/512/921/921094.png") center/cover no-repeat;
+    .job-logo {
       flex-shrink: 0;
-      border: 3px solid #19e2c1;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #19e2c1 url("https://cdn-icons-png.flaticon.com/512/1019/1019796.png") center/contain no-repeat;
+      box-shadow: 0 5px 15px #16a299bb;
+      transition: transform 0.3s ease;
     }
-    .post-content {
+    .job-card:hover .job-logo {
+      transform: scale(1.1);
+    }
+    .job-info {
       flex: 1;
       display: flex;
       flex-direction: column;
+      gap: 6px;
     }
-    .user-name {
+    .job-title {
       font-weight: 700;
-      font-size: 1.15rem;
+      font-size: 1.35rem;
       color: #0b3d72;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
-    .verified-badge {
-      background: linear-gradient(90deg,#138ed1 50%,#19e2c1 100%);
-      color: white;
-      font-size: 0.8rem;
-      padding: 4px 10px;
-      border-radius: 16px;
-      font-weight: 700;
-      display: inline-block;
-    }
-    .lang-tag {
-      font-size: 0.9rem;
-      color: #00796b;
-      margin-left: auto;
-      font-weight: 600;
-      font-family: monospace;
-    }
-    .post-text {
-      margin-top: 8px;
+    .job-location {
       font-size: 1rem;
-      color: #0a2647;
-      line-height: 1.4;
-      word-break: break-word;
-    }
-    /* Sidebar */
-    .sidebar {
-      flex: 1; min-width: 260px;
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px #91c7f1aa;
-      padding: 28px 24px;
-      max-height: calc(100vh - 120px);
-      overflow-y: auto;
-      position: sticky;
-      top: 80px;
-    }
-    .sidebar h3 {
-      color: #138ed1;
-      font-weight: 700;
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #19e2c1;
-      padding-bottom: 8px;
-    }
-    .rep-score {
-      background: #19e2c1;
-      border-radius: 16px;
-      padding: 20px;
-      color: white;
-      font-weight: 700;
-      font-size: 1.2rem;
-      text-align: center;
-      letter-spacing: 2px;
-      box-shadow: 0 5px 15px #16a293cc;
-      user-select: none;
-    }
-    .skills {
-      margin-top: 30px;
-    }
-    .skills h4 {
-      font-weight: 700;
-      color: #0b3d72;
-      margin-bottom: 16px;
-      font-size: 1.2rem;
-      border-bottom: 1.5px solid #19e2c1;
-      padding-bottom: 6px;
-    }
-    .skill-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .skill-tag {
-      background: #e1f5fe;
-      color: #0288d1;
-      padding: 8px 14px;
-      border-radius: 20px;
+      color: #388087;
       font-weight: 600;
-      font-size: 0.9rem;
-      box-shadow: 0 3px 7px #a7d3f8;
-      transition: background-color 0.3s ease;
-      cursor: default;
+      font-style: italic;
     }
-    .skill-tag:hover {
-      background-color: #b3e5fc;
+    .job-pay {
+      font-weight: 600;
+      color: #19e2c1;
+      font-size: 1.1rem;
+      margin-top: 4px;
     }
-    /* Chatbot button */
-    .chatbot-btn {
-      position: fixed;
-      right: 28px;
-      bottom: 28px;
-      background: linear-gradient(90deg, #19e2c1 40%, #138ed1 100%);
-      color: #fff;
-      border-radius: 50%;
-      width: 64px;
-      height: 64px;
+    /* Apply + Pay button */
+    .apply-pay-btn {
+      padding: 12px 28px;
+      background: linear-gradient(90deg, #138ed1 50%, #19e2c1 100%);
+      color: white;
       border: none;
-      font-size: 2.2rem;
-      box-shadow: 0 2px 15px #138ed1cc;
-      cursor: pointer;
-      z-index: 150;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    /* Chatbot popup */
-    .chatbot-popup {
-      display: none;
-      position: fixed;
-      right: 20px;
-      bottom: 100px;
-      width: 320px;
-      background: white;
-      border-radius: 24px;
-      box-shadow: 0 6px 16px #bcd9f1cc;
-      padding: 24px;
-      z-index: 200;
-      font-family: 'Montserrat', sans-serif;
-    }
-    .chatbot-popup.show {
-      display: block;
-    }
-    .chatbot-popup h3 {
-      margin: 0 0 12px 0;
-      color: #138ed1;
-      font-weight: 700;
-      font-size: 1.3rem;
-      border-bottom: 2px solid #19e2c1;
-      padding-bottom: 6px;
-    }
-    .chatbot-popup textarea, .chatbot-popup input[type="text"] {
-      width: 100%;
-      padding: 14px;
-      border-radius: 12px;
-      border: 1.5px solid #cbd6e2;
-      font-size: 1rem;
-      resize: vertical;
-      outline: none;
-      margin-bottom: 14px;
-      box-sizing: border-box;
-      font-family: 'Montserrat', sans-serif;
-    }
-    .chatbot-popup button {
-      width: 100%;
-      background: #138ed1;
-      border: none;
-      padding: 14px 0;
       border-radius: 28px;
-      color: white;
       font-weight: 700;
       font-size: 1.1rem;
+      box-shadow: 0 6px 18px #1aa893bb;
       cursor: pointer;
-      box-shadow: 0 6px 12px #1993b1a0;
       transition: background 0.3s ease;
+      flex-shrink: 0;
     }
-    .chatbot-popup button:hover {
-      background: #0b5c89;
+    .apply-pay-btn:hover {
+      background: linear-gradient(90deg, #0b5c89 50%, #129978 100%);
     }
     /* Responsive */
-    @media (max-width: 992px) {
-      .container {
+    @media (max-width: 720px) {
+      .job-card {
         flex-direction: column;
-        max-width: 90vw;
-        margin: 24px auto;
+        align-items: flex-start;
+        gap: 18px;
+        padding: 22px 20px;
       }
-      .sidebar {
-        position: relative;
-        max-height: none;
-        top: auto;
-        margin-top: 28px;
+      .job-logo {
+        width: 60px;
+        height: 60px;
+      }
+      .apply-pay-btn {
+        width: 100%;
+        text-align: center;
       }
     }
   </style>
 </head>
 <body>
 <header role="banner">
-  <a href="dashboard.html" class="logo" aria-label="Go to dashboard">
+  <a href="dashboard.html" class="logo" aria-label="Go to Dashboard">
     <img src="https://cdn-icons-png.flaticon.com/512/2170/2170153.png" alt="Project Aira logo"/>
     Project Aira
   </a>
   <nav role="navigation" aria-label="Primary navigation">
-    <a href="dashboard.html" class="active" aria-current="page">Feed</a>
-    <a href="jobs.html">Jobs</a>
+    <a href="dashboard.html">Feed</a>
+    <a href="jobs.html" class="active" aria-current="page">Jobs</a>
     <a href="profile.html">Profile</a>
     <a href="index.html">Logout</a>
   </nav>
 </header>
 
-<section class="container" role="main" aria-label="News feed and user sidebar">
-
-  <section class="feed" aria-label="Multilingual user feed">
-    <h2>Smart Multilingual Feed</h2>
-
-    <article class="post-card" tabindex="0">
-      <span class="avatar" aria-hidden="true"></span>
-      <div class="post-content">
-        <div class="user-name" aria-label="User name Rohan Sharma, verified with Aadhaar">
-          Rohan Sharma <span class="verified-badge" lang="en">✔ Aadhaar</span>
-          <span class="lang-tag" lang="hi">[हिन्दी]</span>
-        </div>
-        <p class="post-text" lang="hi">बंगलौर में डेटा एनालिस्ट जॉब की तलाश। हिन्दी और इंग्लिश में निपुण।</p>
+<main class="container" role="main" aria-label="Jobs listings and application">
+  <h1>Available Jobs & Internships</h1>
+  <section class="jobs-list" aria-live="polite">
+    <article class="job-card" tabindex="0" role="region" aria-label="Junior Python Developer job in Mumbai, pay thirty thousand rupees">
+      <div class="job-logo" aria-hidden="true"></div>
+      <div class="job-info">
+        <div class="job-title">Junior Python Developer — Mumbai</div>
+        <div class="job-location">Location: Mumbai, Maharashtra</div>
+        <div class="job-pay">Pay: ₹30,000 (UPI instant)</div>
       </div>
+      <button class="apply-pay-btn" onclick="applyPay('Junior Python Developer')">Apply & Pay</button>
     </article>
 
-    <article class="post-card" tabindex="0">
-      <span class="avatar" style="background:#19e2c1 url('https://cdn-icons-png.flaticon.com/512/921/921089.png') center/cover no-repeat;" aria-hidden="true"></span>
-      <div class="post-content">
-        <div class="user-name" aria-label="User name Lakshmi Rao, verified with College ID">
-          Lakshmi Rao <span class="verified-badge" lang="en">✔ College</span>
-          <span class="lang-tag" lang="en">[English]</span>
-        </div>
-        <p class="post-text">Graphic Designer, available for freelance gigs. UPI accepted.</p>
+    <article class="job-card" tabindex="0" role="region" aria-label="Marketing Intern internship remote, stipend ten thousand rupees">
+      <div class="job-logo" style="background:#138ed1 url('https://cdn-icons-png.flaticon.com/512/2637/2637059.png') center/contain no-repeat;" aria-hidden="true"></div>
+      <div class="job-info">
+        <div class="job-title">Marketing Intern — Remote</div>
+        <div class="job-location">Location: Remote</div>
+        <div class="job-pay">Stipend: ₹10,000 (UPI instant)</div>
       </div>
+      <button class="apply-pay-btn" onclick="applyPay('Marketing Intern')">Apply & Pay</button>
     </article>
 
-    <article class="post-card" tabindex="0">
-      <span class="avatar" style="background:#ff7043 url('https://cdn-icons-png.flaticon.com/512/1946/1946429.png') center/cover no-repeat;" aria-hidden="true"></span>
-      <div class="post-content">
-        <div class="user-name" aria-label="User name Arvind Patel, verified with Work ID">
-          Arvind Patel <span class="verified-badge" lang="en">✔ Work</span>
-          <span class="lang-tag" lang="bn">[বাংলা]</span>
-        </div>
-        <p class="post-text" lang="bn">স্বাধীন প্রকল্পে কাজের সন্ধান করছি। দক্ষতা: ওয়েব ডেভেলপমেন্ট, ডিজাইন।</p>
+    <article class="job-card" tabindex="0" role="region" aria-label="Freelance Graphic Designer job in Bengaluru, pay negotiable">
+      <div class="job-logo" style="background:#d93c41 url('https://cdn-icons-png.flaticon.com/512/2922/2922783.png') center/contain no-repeat;" aria-hidden="true"></div>
+      <div class="job-info">
+        <div class="job-title">Freelance Graphic Designer — Bengaluru</div>
+        <div class="job-location">Location: Bengaluru, Karnataka</div>
+        <div class="job-pay">Pay: Negotiable (UPI instant)</div>
       </div>
+      <button class="apply-pay-btn" onclick="applyPay('Freelance Graphic Designer')">Apply & Pay</button>
     </article>
-
   </section>
-
-  <aside class="sidebar" aria-label="User reputation score and skills">
-    <h3>Reputation & Skills</h3>
-    <div class="rep-score" aria-live="polite" aria-atomic="true">Trust Index: 89%</div>
-    <section class="skills" aria-label="Top skills">
-      <h4>Verified Skills</h4>
-      <div class="skill-list" role="list">
-        <span class="skill-tag" role="listitem" tabindex="0">JavaScript</span>
-        <span class="skill-tag" role="listitem" tabindex="0">Data Analysis</span>
-        <span class="skill-tag" role="listitem" tabindex="0">UI/UX Design</span>
-        <span class="skill-tag" role="listitem" tabindex="0">APIs</span>
-        <span class="skill-tag" role="listitem" tabindex="0">Project Management</span>
-      </div>
-    </section>
-  </aside>
-
-</section>
-
-<!-- Chatbot Floating Button -->
-<button class="chatbot-btn" aria-label="Open AI chatbot" id="chatbotToggle">🧠</button>
-
-<!-- Chatbot Popup -->
-<div class="chatbot-popup" role="dialog" aria-modal="true" aria-labelledby="chatbotTitle" id="chatbotPopup">
-  <h3 id="chatbotTitle">AI Chatbot Assistant</h3>
-  <input type="text" id="chatInput" placeholder="Type in Hindi, Tamil, Bengali..." aria-label="Chat input" />
-  <button id="chatSendBtn" aria-label="Send chat message">Translate & Fact-Check</button>
-  <small>Demo: Multilingual translation + fact-check (simulated)</small>
-</div>
+</main>
 
 <script>
-  const chatbotBtn = document.getElementById('chatbotToggle');
-  const chatbotPopup = document.getElementById('chatbotPopup');
-  chatbotBtn.addEventListener('click', () => {
-    chatbotPopup.classList.toggle('show');
-    if (chatbotPopup.classList.contains('show')) {
-      document.getElementById('chatInput').focus();
-    }
-  });
-
-  document.getElementById('chatSendBtn').addEventListener('click', () => {
-    const input = document.getElementById('chatInput').value.trim();
-    if (!input) {
-      alert("Please enter text to translate or fact-check.");
-      return;
-    }
-    alert(`Simulated AI response for: "${input}"\nTranslation & fact-check in progress...`);
-    document.getElementById('chatInput').value = '';
-  });
+  function applyPay(job) {
+    alert(`Simulating Apply & UPI Payment for "${job}".\nThis is a frontend demo action.`);
+  }
 </script>
-
 </body>
 </html>
+
+
