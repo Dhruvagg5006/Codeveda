@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IntelliSwitch</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <style>
+    body {
+      padding-top: 70px;
+      transition: background-color 0.3s, color 0.3s;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #001f3f;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: #001f3f;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14);
+    }
+    .hero-section {
+      padding: 40px 20px;
+      background: linear-gradient(to right, #72a6da, #092049) !important;
+      background-image: url('background.jpg');
+      background-size: cover;
+      background-position: center;
+      color: #0a0000;
+    }
+    .dark-mode {
+      background-color:#001f3f;
+      color: #d1d1f9;
+    }
+    .dark-mode .navbar, .dark-mode .footer {
+      background-color: #0b0b3b !important;
+    }
+    .dark-mode .card, .dark-mode .modal-content {
+      background-color: #1c1c3c;
+      color: black;
+    }
+    .footer {
+      background-color: #001f3f;
+    }
+    .card {
+      border: none;
+    }
+    .img-feature {
+      max-width: 100%;
+      height:100px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">IntelliSwitch</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="#uploadForm">Analyze</a></li>
+          <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+          <li class="nav-item"><button class="btn btn-light ms-3" onclick="toggleDarkMode()">🌓</button></li>
+          <li class="nav-item"><button class="btn btn-outline-light ms-3" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section text-center">
+    <div class="container">
+      <h1 class="display-5 fw-bold">AI-Powered Resume Screening</h1>
+      <p class="lead">Transform your hiring or career switch with intelligent resume insights.</p>
+      <a href="#uploadForm" class="btn btn-light text-primary fw-semibold btn-lg mt-3 animate__animated animate__pulse animate__infinite">Get Started</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-5">
+    <div class="container">
+      <h2 class="text-center fw-bold text-primary mb-4">About IntelliSwitch</h2>
+      <p class="lead text-center">IntelliSwitch helps job seekers and recruiters streamline the resume screening process. Whether you're transitioning careers or shortlisting candidates, our AI gives you skill gaps, match scores, and personalized roadmaps instantly.</p>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center fw-bold text-primary mb-5">Key Features</h2>
+      <div class="row text-center">
+        <div class="col-md-4">
+          <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png" class="img-feature" alt="Match Scoring">
+          <h5 class="fw-bold">🔍 Resume Match Scoring</h5>
+          <p>Instantly calculate how well a resume matches a job description.</p>
+        </div>
+        <div class="col-md-4">
+          <img src="https://cdn-icons-png.flaticon.com/512/9714/9714879.png" class="img-feature" alt="Skill Roadmap">
+          <h5 class="fw-bold">🧠 Skill Roadmap</h5>
+          <p>Get a personalized path to transition to your dream role based on your current skills.</p>
+        </div>
+        <div class="col-md-4">
+          <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png" class="img-feature" alt="Keyword Highlighter">
+          <h5 class="fw-bold">📝 Keyword Highlighter</h5>
+          <p>Automatically highlight relevant keywords in uploaded resumes to improve visibility.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upload Form -->
+  <section id="uploadForm" class="py-5">
+    <div class="container">
+      <h2 class="text-center fw-bold text-primary mb-4">Upload Resume</h2>
+      <form>
+        <div class="mb-3">
+          <label for="resumeFile" class="form-label">Upload your resume (PDF/DOC)</label>
+          <input class="form-control" type="file" id="resumeFile" accept=".pdf,.doc,.docx" />
+        </div>
+        <div class="mb-3">
+          <label for="jdFile" class="form-label">Upload Job Description (PDF/DOC)</label>
+          <input class="form-control" type="file" id="jdFile" accept=".pdf,.doc,.docx" />
+        </div>
+        
+        <button class="btn btn-primary">Analyze</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center fw-bold text-primary mb-5">What Users Say</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <blockquote class="blockquote">“I was able to transition from sales to data analysis in 2 months thanks to the skill roadmap.”</blockquote>
+          <footer class="blockquote-footer">Anjali Mehra, Career Switcher</footer>
+        </div>
+        <div class="col-md-6">
+          <blockquote class="blockquote">“Screening 100+ resumes is no longer a nightmare. This tool saved us hours!”</blockquote>
+          <footer class="blockquote-footer">HR Team, TechHire Inc.</footer>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer text-white text-center py-3">
+    <div class="container">
+      <p class="mb-0">&copy; 2025 IntelliSwitch. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Login or Signup</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <input type="email" class="form-control mb-2" placeholder="Email">
+          <input type="password" class="form-control mb-2" placeholder="Password">
+          <button class="btn btn-primary w-100">Login</button>
+          <p class="mt-2 text-center"><a href="#">Don't have an account? Signup</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
